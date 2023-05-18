@@ -1,11 +1,16 @@
 import Cookies from 'js-cookie'
 
 export const isAuth = () => {
-  const token = Cookies.get("access_token")
-  if (!token) {
-    return false;
+  if (!Cookies.get("access_token")) {
+    const url = window.location.href;
+    const token = url.split("token=")[1];
+    if (token) {
+      Cookies.set("access_token", token);
+      return true;
+    } 
+    return false
   } 
-  return true;
+  return true
 }
 
 export const getAccessToken = () : string => {

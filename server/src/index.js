@@ -51,7 +51,7 @@ app.get('/callback', (req, res) => {
         .authorizationCodeGrant(code)
         .then(data => {
             res.cookie("access_token", data.body.access_token)
-            res.redirect("http://localhost:3000/dashboard")
+            res.redirect(`${process.env.FRONTEND_URI}/dashboard`);
         })
         .catch(error => {
             console.error('Error getting Tokens:', error);
